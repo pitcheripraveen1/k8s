@@ -27,13 +27,7 @@ spec:
           value: devdb@123
         - name: MONGO_DB_HOSTNAME
           value: mongo
-        volumeMounts:
-        - name: mongo-persistent-storage
-          mountPath: /data/db
-        volumes:
-        - name: mongo-persistent-storage
-          hostPath:
-          path: /tmp/dbbackup
+       
 ---
 # Node Port Service
 apiVersion: v1
@@ -75,7 +69,14 @@ spec:
           - name: MONGO_INITDB_ROOT_USERNAME
             value: devdb
           - name: MONGO_INITDB_ROOT_PASSWORD
-            value: devdb@123 
+            value: devdb@123
+        volumeMounts:
+        - name: mongo-persistent-storage
+          mountPath: /data/db
+        volumes:
+        - name: mongo-persistent-storage
+          hostPath:
+          path: /tmp/dbbackup
        ---
 # Mongo Node Port RC
 apiVersion: v1
