@@ -77,7 +77,7 @@ spec:
         - name: mongo-persistent-storage
           hostPath:
           path: /tmp/dbbackup
-       ---
+---
 # Mongo Node Port RC
 apiVersion: v1
 kind: Service
