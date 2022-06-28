@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: spring-deployment
 spec:
   replicas: 2
   strategy:
@@ -12,13 +12,14 @@ spec:
   template:
     metadata:
       name: springbootpod
+      labels:
+      name: springbootpod
     spec:
       containers:
       - image: dockerhandson/spring-boot-mongo:latest
-        name: springboot
+        name: springbootcontainer
         ports:
-        - name: springboot
-          containerPort: 8080
+        - containerPort: 8080
         env:
         - name: MONGO_DB_USERNAME
           value: devdb
@@ -32,8 +33,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  name: spring-svc
   labels:
-    name: springboot-svc
+    name: springboot
 spec:
   type: NodePort
   ports:
